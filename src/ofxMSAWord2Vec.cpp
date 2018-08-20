@@ -42,7 +42,9 @@ bool Word2Vec::load_bin(string filename, int log_skip) {
         while (1) {
             char c = fgetc(f);
             if (feof(f) || (c == ' ')) break;
-            word += c;
+	    if (c != '\n') {
+	      word += c;
+	    }
         }
 
         if((log_skip > 0) && (word_index % log_skip == 0)) ofLogVerbose() << "Reading row " << word_index << " " << word_index * 100/ num_words << "% : " << word;
